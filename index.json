@@ -1,0 +1,123 @@
+{
+  "name": "retail.category.fts_hybrid_index",
+  "type": "fulltext-index",
+  "sourceType": "gocbcore",
+  "sourceName": "retail",
+  "planParams": {
+    "maxPartitionsPerPIndex": 1024,
+    "indexPartitions": 1
+  },
+  "params": {
+    "doc_config": {
+      "docid_prefix_delim": "",
+      "docid_regexp": "",
+      "mode": "scope.collection.type_field",
+      "type_field": "type"
+    },
+    "mapping": {
+      "analysis": {},
+      "default_analyzer": "standard",
+      "default_datetime_parser": "dateTimeOptional",
+      "default_field": "_all",
+      "default_mapping": {
+        "dynamic": false,
+        "enabled": false
+      },
+      "default_type": "_default",
+      "docvalues_dynamic": false,
+      "index_dynamic": false,
+      "store_dynamic": false,
+      "type_field": "_type",
+      "types": {
+        "category.products": {
+          "dynamic": false,
+          "enabled": true,
+          "properties": {
+            "brand": {
+              "enabled": true,
+              "dynamic": false,
+              "fields": [
+                {
+                  "name": "brand",
+                  "type": "text",
+                  "analyzer": "keyword",
+                  "store": false,
+                  "index": true,
+                  "include_term_vectors": false,
+                  "include_in_all": true,
+                  "docvalues": false
+                }
+              ]
+            },
+            "name": {
+              "enabled": true,
+              "dynamic": false,
+              "fields": [
+                {
+                  "name": "name",
+                  "type": "text",
+                  "analyzer": "standard",
+                  "store": false,
+                  "index": true,
+                  "include_term_vectors": false,
+                  "include_in_all": true,
+                  "docvalues": false
+                }
+              ]
+            },
+            "category": {
+              "enabled": true,
+              "dynamic": false,
+              "fields": [
+                {
+                  "name": "category",
+                  "type": "text",
+                  "analyzer": "keyword",
+                  "store": false,
+                  "index": true,
+                  "include_term_vectors": false,
+                  "include_in_all": true,
+                  "docvalues": false
+                }
+              ]
+            },
+            "description": {
+              "enabled": true,
+              "dynamic": false,
+              "fields": [
+                {
+                  "name": "description",
+                  "type": "text",
+                  "analyzer": "standard",
+                  "store": false,
+                  "index": true,
+                  "include_term_vectors": false,
+                  "include_in_all": true,
+                  "docvalues": false
+                }
+              ]
+            },
+            "embedding": {
+              "enabled": true,
+              "dynamic": false,
+              "fields": [
+                {
+                  "name": "embedding",
+                  "type": "vector",
+                  "dims": 2048,
+                  "similarity": "dot_product",
+                  "index": true
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "store": {
+      "indexType": "scorch",
+      "segmentVersion": 16
+    }
+  },
+  "sourceParams": {}
+}
